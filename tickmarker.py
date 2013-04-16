@@ -67,7 +67,7 @@ class TickMarker(Widget):
 
     def _get_log_value(self):
         return 10 ** self.value
-    value_log = AliasProperty(_get_log_value, _set_log_value)
+    value_log = AliasProperty(_get_log_value, _set_log_value, bind=('value', ))
     '''Current logarithmic value used for the widget.
 
     :data:`value_log` is a :class:`~kivy.properties.AliasProperty` of
@@ -79,7 +79,7 @@ class TickMarker(Widget):
 
     def _get_log_min(self):
         return 10 ** self.min
-    min_log = AliasProperty(_get_log_min, _set_log_min)
+    min_log = AliasProperty(_get_log_min, _set_log_min, bind=('min', ))
     '''Minimum value allowed for :data:`value_log` when using logarithms.
 
     :data:`min_log` is a :class:`~kivy.properties.AliasProperty`
@@ -91,7 +91,7 @@ class TickMarker(Widget):
 
     def _get_log_max(self):
         return 10 ** self.max
-    max_log = AliasProperty(_get_log_max, _set_log_max)
+    max_log = AliasProperty(_get_log_max, _set_log_max, bind=('max', ))
     '''Maximum value allowed for :data:`value_log` when using logarithms.
 
     :data:`max_log` is a :class:`~kivy.properties.AliasProperty` of
