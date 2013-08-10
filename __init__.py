@@ -192,9 +192,9 @@ class TickMarker(Widget):
                 # boundary in it
                 if floor(s_min + n_decades) != floor(s_max):
                     n_decades += 1 - (10 ** (s_min + n_decades + 1) - 10 **
-                                      s_max) // 10 ** floor(s_max + 1)
+                                      s_max) / 10 ** floor(s_max + 1)
                 else:
-                    n_decades += ((10 ** s_max - 10 ** (s_min + n_decades)) //
+                    n_decades += ((10 ** s_max - 10 ** (s_min + n_decades)) /
                                   10 ** floor(s_max + 1))
                 # this might be larger than what is needed, but we delete
                 # excess later
