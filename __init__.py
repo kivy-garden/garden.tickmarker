@@ -192,9 +192,9 @@ class TickMarker(Widget):
                 # boundary in it
                 if floor(s_min + n_decades) != floor(s_max):
                     n_decades += 1 - (10 ** (s_min + n_decades + 1) - 10 **
-                                      s_max) / 10 ** floor(s_max + 1)
+                                      s_max) // 10 ** floor(s_max + 1)
                 else:
-                    n_decades += ((10 ** s_max - 10 ** (s_min + n_decades)) /
+                    n_decades += ((10 ** s_max - 10 ** (s_min + n_decades)) //
                                   10 ** floor(s_max + 1))
                 # this might be larger than what is needed, but we delete
                 # excess later
@@ -252,14 +252,14 @@ class TickMarker(Widget):
                                                 ticks_minor else 1.0)
                 n_ticks = int(floor((s_max - s_min) / tick_dist) + 1)
 
-            count = len(indices) / 2
+            count = len(indices) // 2
             # adjust mesh size
             if count > n_ticks:
                 del vertices[n_ticks * 8:]
                 del indices[n_ticks * 2:]
             elif count < n_ticks:
                     vertices.extend([0] * (8 * (n_ticks - count)))
-                    indices.extend(xrange(2 * count, 2 * n_ticks))
+                    indices.extend(range(2 * count, 2 * n_ticks))
 
             if self.orientation == 'horizontal':
                 center = self.center_y
@@ -282,7 +282,7 @@ class TickMarker(Widget):
             min_minus = center - metrics.dp(6)
 
             if log:
-                for k in xrange(0, n_ticks):
+                for k in range(0, n_ticks):
                     m = k * 8
                     vertices[m + dist1] = start + points[k][0] * tick_dist
                     vertices[m + dist2] = vertices[m + dist1]
@@ -293,7 +293,7 @@ class TickMarker(Widget):
                         vertices[m + above] = maj_plus
                         vertices[m + below] = maj_minus
             else:
-                for k in xrange(0, n_ticks):
+                for k in range(0, n_ticks):
                     m = k * 8
                     vertices[m + dist1] = start + k * tick_dist
                     vertices[m + dist2] = vertices[m + dist1]
