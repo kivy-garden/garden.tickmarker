@@ -11,7 +11,7 @@ To create a log slider from 0.1 to 10 starting at 1 with major tick marks at
 every decade, and minor ticks at every 0.2 decades::
 
     from kivy.uix.slider import Slider
-    from kivy.collective.tickmarker import TickMarker
+    from kivy.garden.tickmarker import TickMarker
     class TickSlider(Slider, TickMarker):
         pass
     s = TickSlider(log=True, min_log=.1, max_log=10, value_log=1,
@@ -26,7 +26,7 @@ To create a log progress bar from 10 to 1000 starting at 500 with major tick
 marks at every decade, and minor ticks at every 0.1 decades::
 
     from kivy.uix.progressbar import ProgressBar
-    from kivy.collective.tickmarker import TickMarker
+    from kivy.garden.tickmarker import TickMarker
     class TickBar(ProgressBar, TickMarker):
         padding = NumericProperty(0)
         min = NumericProperty(0)
@@ -252,14 +252,14 @@ class TickMarker(Widget):
                                                 ticks_minor else 1.0)
                 n_ticks = int(floor((s_max - s_min) / tick_dist) + 1)
 
-            count = len(indices) / 2
+            count = len(indices) // 2
             # adjust mesh size
             if count > n_ticks:
                 del vertices[n_ticks * 8:]
                 del indices[n_ticks * 2:]
             elif count < n_ticks:
                     vertices.extend([0] * (8 * (n_ticks - count)))
-                    indices.extend(xrange(2 * count, 2 * n_ticks))
+                    indices.extend(range(2 * count, 2 * n_ticks))
 
             if self.orientation == 'horizontal':
                 center = self.center_y
@@ -282,7 +282,7 @@ class TickMarker(Widget):
             min_minus = center - metrics.dp(6)
 
             if log:
-                for k in xrange(0, n_ticks):
+                for k in range(0, n_ticks):
                     m = k * 8
                     vertices[m + dist1] = start + points[k][0] * tick_dist
                     vertices[m + dist2] = vertices[m + dist1]
@@ -293,7 +293,7 @@ class TickMarker(Widget):
                         vertices[m + above] = maj_plus
                         vertices[m + below] = maj_minus
             else:
-                for k in xrange(0, n_ticks):
+                for k in range(0, n_ticks):
                     m = k * 8
                     vertices[m + dist1] = start + k * tick_dist
                     vertices[m + dist2] = vertices[m + dist1]
