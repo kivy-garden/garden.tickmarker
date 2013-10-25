@@ -63,39 +63,66 @@ class TickMarker(Widget):
     '''
 
     def _set_log_value(self, value):
+        if not self.log:
+            return
         self.value = log10(value)
 
     def _get_log_value(self):
+        if not self.log:
+            return self.value
         return 10 ** self.value
     value_log = AliasProperty(_get_log_value, _set_log_value, bind=('value', ))
     '''Current logarithmic value used for the widget.
 
     :data:`value_log` is a :class:`~kivy.properties.AliasProperty` of
     :data:`value`.
+
+    .. note::
+
+    :data:`value_log` values is only valid when :data:`log` is True in order to
+    prevent overflow when used with normal numbers.
     '''
 
     def _set_log_min(self, value):
+        if not self.log:
+            return
         self.min = log10(value)
 
     def _get_log_min(self):
+        if not self.log:
+            return self.min
         return 10 ** self.min
     min_log = AliasProperty(_get_log_min, _set_log_min, bind=('min', ))
     '''Minimum value allowed for :data:`value_log` when using logarithms.
 
     :data:`min_log` is a :class:`~kivy.properties.AliasProperty`
     of :data:`min`.
+
+    .. note::
+
+    :data:`min_log` values is only valid when :data:`log` is True in order to
+    prevent overflow when used with normal numbers.
     '''
 
     def _set_log_max(self, value):
+        if not self.log:
+            return
         self.max = log10(value)
 
     def _get_log_max(self):
+        if not self.log:
+            return self.max
         return 10 ** self.max
     max_log = AliasProperty(_get_log_max, _set_log_max, bind=('max', ))
     '''Maximum value allowed for :data:`value_log` when using logarithms.
 
     :data:`max_log` is a :class:`~kivy.properties.AliasProperty` of
     :data:`max`.
+
+    .. note::
+
+    :data:`max_log` values is only valid when :data:`log` is True in order to
+    prevent overflow when used with normal numbers.
     '''
 
     log = BooleanProperty(False)
