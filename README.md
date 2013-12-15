@@ -1,5 +1,5 @@
 TickMarker
-======
+==========
 
 tickmarker exports the `TickMarker` widget, which places ticks in the center
 of the widget so that when combined with another widget e.g. a slider it
